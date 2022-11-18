@@ -1,32 +1,30 @@
-import React from 'react';
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import { useEffect, useState } from "react";
-import Logo from "../Logo/index";
 import Card from "../Card/index.js";
 import Search from "../Search/index.js";
-import Submit from "../Submit/index.js";
 
 function App() {
-  const [news, setNews] = useState("");
+  const [news, setNews] = useState([]);
 
-  useEffect((searchTerm) => {
-    async function getNews(searchTerm) {
+  useEffect(() => {
+    async function getNews() {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?q=${searchTerm}country=gb&apiKey=25bbdfd6a26d4b0386c421dd40623a55`
+        `https://newsapi.org/v2/top-headlines?country=gb&apiKey=25bbdfd6a26d4b0386c421dd40623a55`
       );
       const data = await response.json();
       console.log(data);
-      setNews(data);
+      console.log(data.articles);
+      setNews(data.articles);
+      console.log(news);
     }
-    getNews(searchTerm);
+    getNews();
   }, []);
 
   return (
     <div className="App">
-      <Logo />
       <Search />
-      <Card props={news} />
+      <Card news={news} />
     </div>
   );
 }
