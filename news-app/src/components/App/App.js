@@ -1,27 +1,32 @@
 import React from 'react';
+import { useState } from "react";
+import "./App.css";
+import { useEffect, useState } from "react";
+import Logo from "../Logo/index";
 import Card from "../Card/index.js";
-import Input from "../Input/index.js";
-import Logo from "../Logo";
 import Search from "../Search/index.js";
 import Submit from "../Submit/index.js";
 
 function App() {
+  const [news, setNews] = useState("");
+
+  useEffect((searchTerm) => {
+    async function getNews(searchTerm) {
+      const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?q=${searchTerm}country=gb&apiKey=25bbdfd6a26d4b0386c421dd40623a55`
+      );
+      const data = await response.json();
+      console.log(data);
+      setNews(data);
+    }
+    getNews(searchTerm);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Logo />
+      <Search />
+      <Card props={news} />
     </div>
   );
 }
