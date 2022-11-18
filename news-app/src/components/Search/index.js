@@ -1,21 +1,19 @@
 import { useState } from "react";
 import "./search.css";
 
-function Search({ handleSearch }) {
-  const [searchTerm, setSearchTerm] = useState("");
+function Search({ handleClick }) {
+  const [userInput, setUserInput] = useState("");
 
   function handleChange(e) {
-    setSearchTerm(e.target.value);
+    setUserInput(e.target.value);
   }
 
   return (
     <section id="search">
-      <label>
-        Search: <input value={searchTerm} onChange={handleChange} />
-      </label>
+      <input value={userInput} onChange={handleChange} />
       <button
         onClick={() => {
-          handleSearch(searchTerm);
+          handleClick(userInput);
         }}
       >
         Search

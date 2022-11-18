@@ -3,27 +3,35 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Card from "../Card/index.js";
 import Search from "../Search/index.js";
+import Header from "../Header/index.js";
 
 function App() {
   const [news, setNews] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleClick(userInput) {
+    setSearchTerm(userInput);
+  }
+
   useEffect(() => {
-    async function getNews() {
+    async function getNews(searchTerm) {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=gb&apiKey=25bbdfd6a26d4b0386c421dd40623a55`
+        //`https://newsapi.org/v2/top-headlines?q=${searchTerm}&country=gb&apiKey=25bbdfd6a26d4b0386c421dd40623a55`
+        `https://newsapi.org/v2/everything?q=${
+          searchTerm || "world"
+        }&from=2022-11-18&language=en&apiKey=25bbdfd6a26d4b0386c421dd40623a55`
       );
       const data = await response.json();
-      console.log(data);
-      console.log(data.articles);
       setNews(data.articles);
-      console.log(news);
     }
-    getNews();
-  }, []);
+    getNews(searchTerm);
+  }, [searchTerm]);
 
   return (
     <div className="App">
-      <Search />
+      <Header />
+      <Search handleClick={handleClick} />
       <Card news={news} />
     </div>
   );

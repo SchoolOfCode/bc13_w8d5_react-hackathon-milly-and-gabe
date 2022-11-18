@@ -1,19 +1,19 @@
 import React from "react";
-//import news from "../App/App.js";
+import "./article.css";
 
 function Card({ news }) {
   console.log(news);
   return (
-    <div>
+    <div id="card-container">
       {news.length > 0 &&
         news.map((newsItem) => (
-          <>
-            <h1>{newsItem.title}</h1>
+          <article>
             <img src={newsItem.urlToImage} alt="Article header" />
+            <h2>{newsItem.title}</h2>
             <p>{newsItem.description}</p>
             <p>{newsItem.content}</p>
             <a href={newsItem.url}>Read more</a>
-          </>
+          </article>
         ))}
     </div>
   );
