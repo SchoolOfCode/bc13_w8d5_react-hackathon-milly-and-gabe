@@ -1,10 +1,11 @@
-import logo from "./logo.svg";
+import React from 'react';
 import { useState } from "react";
 import "./App.css";
 import { useEffect, useState } from "react";
 import Logo from "../Logo/index";
-import Search from "../Search/index";
-import Card from "../Card/index";
+import Card from "../Card/index.js";
+import Search from "../Search/index.js";
+import Submit from "../Submit/index.js";
 
 function App() {
   const [news, setNews] = useState("");
