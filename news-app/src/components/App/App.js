@@ -1,5 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Card from "../Card/index.js";
+import Input from "../Input/index.js";
+import Logo from "../Logo";
+import Search from "../Search/index.js";
+import Submit from "../Submit/index.js";
 
 function App() {
   return (
