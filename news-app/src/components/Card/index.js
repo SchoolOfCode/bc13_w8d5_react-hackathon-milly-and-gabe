@@ -12,7 +12,9 @@ function Card({ news }) {
             <h2>{newsItem.title}</h2>
             <p>{newsItem.description}</p>
             <p>{newsItem.content}</p>
-            <a href={newsItem.url}>Read more</a>
+            <a class="link" href={newsItem.url}>
+              Read more
+            </a>
           </article>
         ))}
     </div>
